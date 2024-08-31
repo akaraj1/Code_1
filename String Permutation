@@ -1,6 +1,27 @@
-You are given a string s and an array of strings words. All the strings of words are of the same length.
+def find_ind(s, words):
+    from itertools import permutations
+    word_len = len(words[0])
+    concat_len = word_len * len(words)
+    perms = set(''.join(p) for p in permutations(words))
+    a=[]
+    for i in range(len(s)):
+        if s[i:i+concat_len] in perms:
+            a.append(i)
+    return a
+#Eg 1 :
+s = "heybrofjxcbroheybrohe"
+words = ["hey", "bro"]
+ar=(find_ind(s, words))
+print(ar)
 
-A concatenated string is a string that exactly contains all the strings of any permutation of words concatenated.
+OUTPUT:-
+[0, 10, 13]
 
-For example, if words = ["ab","cd","ef"], then "abcdef", "abefcd", "cdabef", "cdefab", "efabcd", and "efcdab" are all concatenated strings. "acdbef" is not a concatenated string because it is not the concatenation of any permutation of words.
-Return an array of the starting indices of all the concatenated substrings in s.
+#Eg 2 :
+s = "foobarfoothjbarfoocg"
+words=["bar","foo"]
+ar=find_ind(s,words)
+print(ar)
+
+OUTPUT:-
+[0, 3, 12]
